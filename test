@@ -1,1 +1,26 @@
-test
+trigger: none  # Run manually or customize triggers
+
+pool:
+  vmImage: 'ubuntu-latest'  # Use an appropriate agent
+
+variables:
+  SONARQUBE_URL: "https://your-sonarqube-instance"
+  PROJECT_KEY: "your-project-key"
+  API_TOKEN: "$(SONARQUBE_TOKEN)"  # Store securely in Azure DevOps variables
+
+steps:
+  
+  - script: |
+      FILE_PATH="$(Build.ArtifactStagingDirectory)/SonarQubeReport.pdf"
+
+      echo "Downloading SonarQube project report..."
+      curl -s -u "$API_TOKEN:" -o $FILE_PATH "$SONARQUBE_URL/api/project_analysis/report?project=$PROJECT_KEY&format=pdf"
+
+      echo "Report saved at: $FILE_PATH"
+    displayName: "Download SonarQube Project Report"
+
+  - task: PublishBuildArtifacts@1
+    displayName: "Publish SonarQube Report"
+    inputs:
+      pathToPublish: "$(Build.ArtifactStagingDirectory)/SonarQubeReport.pdf"
+      artifactName: "SonarQubeReport"
