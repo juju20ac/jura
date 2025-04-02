@@ -1,3 +1,8 @@
+curl -s -H "Authorization: Bearer $(SONARQUBE_TOKEN)" \
+     "$SONARQUBE_URL/api/measures/component?component=$PROJECT_KEY&metricKeys=alert_status,bugs,vulnerabilities,code_smells"
+
+
+
 trigger: none  # Run manually or customize triggers
 
 pool:
