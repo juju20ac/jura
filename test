@@ -1,6 +1,7 @@
 curl -s -H "Authorization: Bearer $(SONARQUBE_TOKEN)" \
      "$SONARQUBE_URL/api/measures/component?component=$PROJECT_KEY&metricKeys=alert_status,bugs,vulnerabilities,code_smells"
 
+curl -u admin:your_token "http://your-sonarqube-url/api/issues/search?types=VULNERABILITY&tags=owasp-top10" -o owasp_top10_issues.json
 
 
 trigger: none  # Run manually or customize triggers
