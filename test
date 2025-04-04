@@ -1,3 +1,9 @@
+curl -s -H "Authorization: Bearer <YOUR_TOKEN>" \
+  "https://your-sonarqube-instance/api/issues/search?componentKeys=your-project-key&types=VULNERABILITY,SECURITY_HOTSPOT&tags=owasp-a1,owasp-a2,owasp-a3,owasp-a4,owasp-a5,owasp-a6,owasp-a7,owasp-a8,owasp-a9,owasp-a10&resolved=false"
+
+
+
+
 curl -s -H "Authorization: Bearer $(SONARQUBE_TOKEN)" \
      "$SONARQUBE_URL/api/measures/component?component=$PROJECT_KEY&metricKeys=alert_status,bugs,vulnerabilities,code_smells"
 
